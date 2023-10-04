@@ -5,7 +5,7 @@ metadata:
   labels:
     app: flask
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: flask        # must be the same value as the label in the template 
@@ -17,6 +17,7 @@ spec:
       containers:
       - name: flask-container
         image: mattneedstolearn/duo-flask:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5500
 ---
