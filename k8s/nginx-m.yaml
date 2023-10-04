@@ -29,7 +29,7 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: nginx-config-vol
-          mountpath: /etc/nginx/
+          mountPath: /etc/nginx/
 ---
 apiVersion: v1
 kind: ConfigMap
