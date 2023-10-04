@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: flask-deployment
   labels:
-    app: flask
+    app: flask-app
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: flask        # must be the same value as the label in the template 
+      app: flask-app        # must be the same value as the label in the template 
   template:
     metadata:
       labels:
-        app: flask     # this label is assigned to each pod in the set
+        app: flask-app    # this label is assigned to each pod in the set
     spec:
       containers:
       - name: flask-container
