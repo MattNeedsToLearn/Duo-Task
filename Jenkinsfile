@@ -26,8 +26,8 @@ pipeline {
                 script {
                         sh '''
                         kubectl apply -f ./k8s -n dev
-                        kubectl rollout restart flask-deployment  --namespace=dev
-                        kubectl rollout restart nginx-deployment  --namespace=dev
+                        kubectl rollout restart deployment flask-deployment  --namespace=dev
+                        kubectl rollout restart deployment nginx-deployment  --namespace=dev
                         '''
                 }
             }
