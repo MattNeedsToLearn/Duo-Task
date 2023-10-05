@@ -16,7 +16,7 @@ pipeline {
                 script {
                         sh '''
                         docker push mattneedstolearn/duo-task:latest
-                        docker mattneedstolearn/duo-nginx:latest
+                        docker push mattneedstolearn/duo-nginx:latest
                         '''
                 }
             }
