@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Appease the Machine Spirit - Build') {
             steps {
                 script {
                     sh '''
@@ -11,7 +11,7 @@ pipeline {
                 }
             }
         }
-        stage('Push') {
+        stage('Recite the Centicle of Communication - Push') {
             steps {
                 script {
                         sh '''
@@ -21,10 +21,11 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Empower the Machine Spirit - Deploy') {
             steps {
                 script {
                         sh '''
+                        git pull
                         kubectl apply -f ./k8s -n dev
                         kubectl rollout restart deployment flask-deployment  --namespace=dev
                         kubectl rollout restart deployment nginx-deployment  --namespace=dev
@@ -32,7 +33,7 @@ pipeline {
                 }
             }
         }
-        stage('Clean Up') { 
+        stage('Apply Sacred Unguents - Clean Up') { 
             steps {
                 sh '''
                 echo "nothing here yet"
