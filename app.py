@@ -13,7 +13,7 @@ def home():
     name = getenv('YOUR_NAME')
     if name is None:
       name = "friend"
-    return f"<h1>Greetings{name}.</h1>\n\n<h2> This Machine Spirit fragment is: {hostname}. Glory to the Omnissiah!.</h2>\n"
+    return f"<h1>Greetings {name}.</h1>\n\n<h2> This Machine Spirit fragment is: {hostname}. Glory to the Omnissiah!.</h2>\n"
 
 if __name__=='__main__':
   app.run(host='0.0.0.0', port=5500, debug=True)
