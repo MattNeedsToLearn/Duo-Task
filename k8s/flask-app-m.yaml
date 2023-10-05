@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: mattneedstolearn/duo-task-flask:latest
+        image: mattneedstolearn/duo-task:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5500
