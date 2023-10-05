@@ -4,53 +4,38 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    if (env.GIT_BRANCH == 'development') {
-                    sh 'docker build -t stratcastor/duo-backend:latest -t stratcastor/duo-backend:$BUILD_NUMBER .'
-                    } else {
-                        sh "echo 'Build not required!'"
-                    }
+                    sh '''
+                    docker build -t mattneedstolearn/duo-task:latest .
+                    docker build -t mattneedstolearn/duo-nginx:latest ./nginx
+                    '''
                 }
             }
         }
         stage('Push') {
             steps {
                 script {
-                    if (env.GIT_BRANCH == 'development') {
                         sh '''
-                        docker push stratcastor/duo-backend:latest
-                        docker push stratcastor/duo-backend:$BUILD_NUMBER
+                        docker push mattneedstolearn/duo-task:latest
+                        docker mattneedstolearn/duo-nginx:latest
                         '''
-                    } else {
-                        sh "echo 'Push not required!'"
-                    }
                 }
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    if (env.GIT_BRANCH == 'development') {
-                        sh'''
-                        kubectl apply -f . --namespace=development
-                        kubectl rollout restart deployment backend --namespace=development
+                        sh '''
+                        kubectl apply -f ./k8s -n dev
+                        kubectl rollout restart flask-deployment  --namespace=dev
+                        kubectl rollout restart nginx-deployment  --namespace=dev
                         '''
-                    } else if (env.GIT_BRANCH == 'main') {
-                        sh'''
-                        kubectl apply -f . --namespace=production
-                        kubectl rollout restart deployment backend --namespace=production
-                        '''
-                    } else {
-                        sh'''
-                        echo "unrecognised branch"
-                        '''
-                    }
                 }
             }
         }
         stage('Clean Up') { 
             steps {
                 sh '''
-                docker system prune -a --force
+                echo "nothing here yet"
                 '''
             }
         }
